@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>EvoJev | 方法与案例</title>
+<link rel="stylesheet" href="web/methodology.css">
+<link rel="stylesheet" href="web/cursor.css">
+</head>
+<body>
+<header class="topbar">
+<a class="brand" href="./"><strong>EvoJev</strong><span id="brand-detail">方法与案例</span></a>
+<div class="top-actions">
+<a class="icon" href="./" id="results-link" title="结果展示" aria-label="结果展示"><i data-lucide="chart-no-axes-combined"></i></a>
+<button class="icon" id="theme-toggle" role="switch" aria-checked="false" title="切换深色" aria-label="切换深色"><i data-lucide="moon"></i></button>
+<button class="icon language" id="language-toggle" title="Switch to English" aria-label="Switch to English"><i data-lucide="languages"></i><span>中</span></button>
+</div>
+</header>
+<main>
+<section class="introduction">
+<div class="eyebrow" id="eyebrow">EVIDENCE-GROUNDED HARNESS EVOLUTION</div>
+<h1 id="page-title">从一题诊断，理解整套方法。</h1>
+<p id="method-summary">冻结的 JEV 引导树搜索获取证据，Harness 验证根因，大模型在首答保存后提炼可靠经验，只改进后续题。</p>
+<figure class="workflow-overview" aria-labelledby="workflow-caption">
+<img id="workflow-image" src="workflow.png" alt="EvoJev 的证据驱动诊断与题后 Harness 演进流程" width="948" height="632" decoding="async">
+<figcaption id="workflow-caption">
+<p id="workflow-diagnosis">冻结的 JEV 为根因候选和检查动作评分，PUCT 树搜索在固定预算内获取证据，Harness 根据来源一致的证据约束诊断。</p>
+<p id="workflow-evolution">每题先保存唯一首答并评分，再由 Qwen3.5-27B 提议通用规则，经历史证据审核通过后写入 Harness，只用于后续题目。</p>
+<p id="workflow-experience">独立的 TF-IDF 与逻辑回归模型每累计完成八题，用全部已完成且流程正常的案例重新拟合，辅助 JEV 排序候选根因，并指导 PUCT 树搜索选择更有区分力的检查，JEV 与 LLM 权重不变。</p>
+</figcaption>
+</figure>
+<div class="case-strip"><span><i data-lucide="file-search"></i><b>case_0158</b></span><span id="case-position">第 389 题</span><span id="case-version">H82 → H83</span><span class="source-caption" id="source-caption">真实轨迹节选 · 非重新推理</span></div>
+</section>
+<section class="playback">
+<div class="playback-label"><i data-lucide="route"></i><span id="playback-caption">模块流程</span><span class="mono" id="position">01 / 08</span></div>
+<div class="playback-actions">
+<button class="icon" id="reset" title="回到开始" aria-label="回到开始"><i data-lucide="rotate-ccw"></i></button>
+<button class="icon" id="previous" title="上一步" aria-label="上一步"><i data-lucide="chevron-left"></i></button>
+<button class="icon play" id="play" title="播放流程" aria-label="播放流程"><i data-lucide="play"></i></button>
+<button class="icon" id="next" title="下一步" aria-label="下一步"><i data-lucide="chevron-right"></i></button>
+</div>
+</section>
+<nav class="stage-navigation" aria-label="方法模块" id="stage-navigation"></nav>
+<div class="seek-row"><span id="diagnosis-label">当前题诊断</span><input id="seek" type="range" min="0" max="7" value="0" aria-label="当前模块"><span id="evolution-label">题后演进</span></div>
+<section class="workspace">
+<div class="diagram-region"><div class="region-heading"><h2 id="diagram-title">证据与决策路径</h2><span id="diagram-tag">JEV WEIGHTS FROZEN</span></div><canvas id="method-canvas" aria-label="方法流程图"></canvas><div class="diagram-legend"><span><i class="diagnosis-dot"></i><b id="legend-diagnosis">当前题</b></span><span><i class="evolution-dot"></i><b id="legend-evolution">后续题</b></span><span id="diagram-caption">动画表示模块衔接，不是实际运行时序。</span></div></div>
+<article class="explanation" aria-live="polite">
+<div class="module-marker"><span id="module-number">01</span><span id="module-plane">诊断阶段</span></div>
+<h2 id="module-title"></h2><p id="module-principle"></p>
+<div class="interpretation"><i data-lucide="lightbulb"></i><p id="module-example"></p></div>
+<div class="handoff"><i data-lucide="arrow-right"></i><span id="module-handoff"></span></div>
+</article>
+</section>
+<section class="io-region">
+<div class="io-block"><div class="region-heading"><h2 id="input-label">输入</h2><i data-lucide="log-in"></i></div><pre id="module-input"></pre></div>
+<div class="io-block output"><div class="region-heading"><h2 id="output-label">输出</h2><i data-lucide="log-out"></i></div><pre id="module-output"></pre></div>
+</section>
+<section class="memory-region" id="experience-note">
+<h2 id="memory-title">两种更新频率与独立评分模型。</h2>
+<p id="memory-copy"></p>
+<article class="update-frequency"><h3><i data-lucide="git-branch"></i><span id="memory-rule-title">规则：每题</span></h3><div><p id="memory-rule-definition"></p><p class="frequency-example" id="memory-rule-example"></p></div></article>
+<article class="update-frequency"><h3><i data-lucide="history"></i><span id="memory-refresh-title">经验：每八题</span></h3><div><p id="memory-refresh-definition"></p><p class="frequency-example" id="memory-refresh-example"></p></div></article>
+<article class="update-frequency"><h3><i data-lucide="chart-no-axes-combined"></i><span id="memory-model-title">模型：独立评分</span></h3><div><p id="memory-model-definition"></p><p class="frequency-example" id="memory-model-example"></p></div></article>
+</section>
+<section class="guard-region">
+<div><i data-lucide="lock-keyhole"></i><h2 id="guard-title">首答先保存，反馈后释放。</h2><p id="guard-copy">第 389 题用 H82 作答。H83 只用于第 390 题起，不能修改这一题的答案。</p></div>
+<div class="version-chain"><span id="version-before">本题</span><b>H82</b><i data-lucide="arrow-right"></i><b id="version-after">H83</b><span id="version-future">后续题</span></div>
+</section>
+<section class="result-region">
+<div><span id="result-caption">全量在线首答准确率</span><strong>60.21<span>%</span></strong><p id="result-count">454 / 754。对象与原因都正确才计分。</p></div>
+<p id="result-boundary">每题诊断一次。异常与缺失输出计错。公开基准此前已被本项目使用，这不是未见基准成绩。80% 目标未达到。</p>
+</section>
+<section class="quickstart">
+<h2 id="start-title">在自己的电脑上启动。</h2>
+<p id="start-copy">项目根目录执行下方命令。展示系统只需 Python 3.9+，无需模型或 GPU。</p>
+<pre>python3 scripts/dashboard.py --port 8777</pre>
+<p><a href="http://127.0.0.1:8777/README.html" id="start-link">localhost:8777/README.html</a> · <a href="docs/reproduce.md" id="run-link">算法运行指南</a></p>
+<p class="citations"><a href="https://huggingface.co/aimeigaoshou/agent-jev">JEV</a><a href="https://huggingface.co/Qwen/Qwen3.5-27B">Qwen3.5-27B</a><a href="https://github.com/deepseek-ai/deepseek-harness">DeepSeek Harness</a><a href="https://github.com/LLM4Ops/Cloud-OpsBench">Cloud-OpsBench</a></p>
+</section>
+<footer><span id="footer-note">示例省略非关键字段。八个模块仍保留实际的数据与反馈边界。</span><div><a href="docs/methodology.md" id="text-link">文字版</a><a href="docs/case_walkthroughs.json" id="case-link">完整案例</a></div></footer>
+</main>
+<script src="web/lucide.min.js"></script>
+<script src="web/methodology.js"></script>
+</body>
+</html>

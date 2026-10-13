@@ -1,0 +1,92 @@
+'use strict';
+const isOnline=()=>data?.method_family==='online_single_pass';
+const frozenOverview=overview;
+overview=function(){
+  frozenOverview();
+  if(!isOnline())return;
+  const admitted=data.timeline.filter(event=>event.accepted).length;
+  $('accuracy-caption').textContent='Prequential first-answer accuracy';
+  $('accuracy-method').textContent='Exact object AND cause · no retakes';
+  const chart=$('accuracy-chart').closest('.plot-block');
+  chart.querySelector('h2').textContent='Cumulative first-answer accuracy';
+  chart.querySelector('.caption').textContent='Chronological first answers, scored before each post-case update; no retrospective replacements.';
+  $('accuracy-chart').setAttribute('aria-label','Prequential cumulative first-answer accuracy');
+  document.querySelector('.plot-block.comparison h2').textContent='Single-pass outcome';
+  $('gain').parentElement.querySelector('span').textContent='Harness versions';
+  $('gain').textContent=String(data.timeline.at(-1)?.harness_version||0);
+  $('gain-detail').textContent=`${admitted} rule admission steps`;
+  $('heldout').parentElement.querySelector('span').textContent='Immutable first answers';
+  $('heldout').textContent=`${data.completed} / ${data.planned}`;
+  $('heldout').parentElement.querySelector('small').textContent='One diagnosis per case';
+  $('paired-caption').textContent='CHRONOLOGICAL FIRST ANSWERS';
+  $('paired-caption').parentElement.querySelector('h2').textContent='Single-pass evolution';
+  $('threshold-note').textContent='Each score is the original answer, before its feedback became available. This public benchmark was used earlier; these are online-stream results, not claims of unseen-benchmark generalization.';
+  const rows=[];
+  for(let start=0;start<data.cases.length;start+=64){
+    const cases=data.cases.slice(start,start+64),correct=cases.filter(c=>c.arms[primary].correct).length;
+    rows.push(`<tr><td>${start+1}–${start+cases.length}</td><td>${correct} / ${cases.length}</td><td>${pct(correct,cases.length)}</td><td>${cases.filter(c=>c.update.decision==='accepted').length}</td><td>${cases.at(-1).update.version_after}</td></tr>`);
+  }
+  $('comparison-table').innerHTML=`<div class="table-scroll"><table><thead><tr><th>Stream positions</th><th>First correct</th><th>Accuracy</th><th>Rule updates</th><th>Harness version</th></tr></thead><tbody>${rows.join('')}</tbody></table></div>`;
+  $('run-status').textContent='Verified single-pass results';
+  $('updated').textContent=`${data.planned} unique cases · ${data.completed} original predictions`;
+};
+const frozenKnowledge=knowledge;
+knowledge=function(){
+  frozenKnowledge();
+  if(!isOnline())return;
+  $('knowledge-stats').lastElementChild.innerHTML='<strong>0</strong><span>Historical diagnosis retakes</span>';
+  document.querySelector('#knowledge .section-heading .muted').textContent='Source-bound rules checked against past cached evidence; not a guarantee of future prediction stability.';
+  document.querySelectorAll('#rule-table .tag').forEach(tag=>{tag.textContent='Admitted evidence';tag.classList.add('accepted');});
+};
+const frozenStudy=applyStudy;
+applyStudy=function(){
+  frozenStudy();
+  if(!isOnline())return;
+  $('study-controls').textContent='incidents · one online method';
+  document.querySelector('.side-study strong').textContent=String(data.planned);
+  document.querySelector('.side-study .side-label').textContent='SINGLE-PASS STUDY';
+  document.querySelector('.secure').innerHTML='<i data-lucide="shield-check"></i>First-answer integrity';
+  $('budget-note').textContent='One actual diagnosis per case, at most 72 snapshot calls. Later feedback can update future Harness versions, never old scores.';
+  $('method-search').textContent='JEV + bounded PUCT';
+  $('method-search-detail').textContent='96 surrogate simulations · replan after evidence';
+  $('method-admission').textContent='Past-only predicate precision and ownership checks';
+  document.querySelector('[data-node=admission] small').textContent='No conflicting proof on past correct cases';
+  document.querySelector('[data-node=diagnosis] b').textContent='Immutable first answer';
+  document.querySelector('[data-node=diagnosis] span').textContent='Persist before releasing case feedback';
+  document.querySelector('[data-node=update] b').textContent='Harness for the next case';
+  document.querySelector('[data-node=feedback] b').textContent='Completed-case feedback';
+  document.querySelector('.transfer-band span').textContent='After each immutable first answer';
+  $('method-lead-text').textContent='A DeepSeek plugin-design RCA adapter separates evidence, frozen JEV ranking, bounded PUCT, immutable answers, post-case advice and admission. Case t uses Harness H_t; only after its first answer is locked does Qwen3.5 propose an update for subsequent cases. This adaptation is not the stock dsh Agent runtime.';
+  const principles=document.querySelectorAll('.method-principles > div');
+  principles[1].querySelector('p').textContent='Admit source-bound predicates only with past-case support and precision checks. Matching cached evidence never re-runs a past diagnosis.';
+  principles[2].querySelector('h3').textContent='First-answer verification';
+  principles[2].querySelector('p').textContent='Freeze JEV and runtime code. Each case runs once; its first answer and score cannot be replaced after feedback.';
+  $('method-budget').textContent='One evolving method · 72 actual calls per case';
+  $('method-ranking').textContent='JEV priors + PUCT acquisition + executable evidence';
+  document.querySelector('.method-boundary p').textContent='754 chronological first answers. Only completed feedback can affect the next case. The public benchmark was used earlier by this project; past predicate validation does not guarantee future accuracy.';
+  const verification=document.querySelector('.method-lane.verification');
+  verification.querySelector('h2').textContent='Single-pass verification';
+  verification.querySelector('.freeze-sequence').innerHTML='<span><i data-lucide="scan-search"></i>Diagnose once</span><i data-lucide="arrow-right"></i><span><i data-lucide="lock"></i>Lock first answer</span><i data-lucide="arrow-right"></i><span><i data-lucide="git-branch"></i><span id="freeze-count">Post-case update</span></span><i data-lucide="arrow-right"></i><span><i data-lucide="arrow-right"></i>Next case only</span>';
+  $('case-filter').innerHTML='<option value="all">All first answers</option><option value="wrong">First incorrect</option><option value="online_stream">Online stream</option>';
+  $('benchmark-budget').textContent='One evolving method; 72 actual tool calls per case.';
+  document.querySelector('#historical-role').closest('tbody').innerHTML='<tr><td>Online stream</td><td>754</td><td id="historical-role">One first answer per case; feedback released afterward</td></tr><tr><td>Past evidence memory</td><td>Growing</td><td>Predicate checks only; no past-case re-inference</td></tr>';
+  document.querySelector('.benchmark-boundary p').innerHTML='Report exact object-and-cause prequential accuracy from immutable first predictions. Future labels are unavailable to the solver and advisor; completed-case feedback is available after the original answer. Prior public-benchmark use remains disclosed. <span id="benchmark-budget">One evolving method; 72 actual tool calls per case.</span>';
+  document.querySelector('.benchmark-evidence dl').innerHTML='<dt>Solver input</dt><dd>Query, namespace and public observations</dd><dt>Post-case feedback</dt><dd>Only after the same case’s immutable first answer</dd><dt>Future cases</dt><dd>Labels inaccessible to the solver and advisor</dd>';
+  methodPlane(plane);icons();
+};
+const frozenPlane=methodPlane;
+methodPlane=function(id){
+  frozenPlane(id);
+  if(!isOnline())return;
+  const text={diagnosis:'Frozen JEV ranks candidates and evidence checks. PUCT plans bounded acquisitions using surrogate utility, not actual future observations. Current-case feedback is not available.',evolution:'After the first answer is locked, the LLM proposes a reusable evidence predicate. Admission checks cached past evidence only; accepted changes apply to the next case, never a replacement answer.',verification:'754 unique first answers are permanently scored. Runtime code and JEV stay frozen while Harness versions evolve. No old diagnosis is re-run after feedback.'};
+  $('method-insight').innerHTML=`<i data-lucide="info"></i><span>${text[id]}</span>`;icons();
+};
+const frozenSelect=selectCase;
+selectCase=async function(id){
+  await frozenSelect(id);
+  if(!isOnline()||selected!==id)return;
+  const current=data.cases.find(c=>c.case===id);
+  $('case-partition').textContent=`Stream ${current.stream_index+1} · Harness ${current.harness_version}`;
+  $('case-outcomes').insertAdjacentHTML('beforeend',`<div class="outcome"><strong>Post-case update</strong><span>${esc(current.update.decision)}</span><span>Next Harness version: ${current.update.version_after}</span><small>${current.update.new_rules} new rules · original score unchanged</small></div>`);
+};
+if(isOnline()){applyStudy();overview();}

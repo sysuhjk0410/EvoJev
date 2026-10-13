@@ -1,0 +1,16 @@
+{
+  "schema": "deepseek_design_rca_adapter_v1",
+  "upstream": "https://github.com/deepseek-ai/deepseek-harness",
+  "inspected_commit": "639ed015397290b3745d163aafe02ffee4aa3f84",
+  "implementation": "RCA adaptation of plugin-based design; not the stock dsh agent runtime",
+  "plugins": {
+    "public_evidence": {"backend": "Cloud-OpsBench snapshot", "read_only": true},
+    "decision_model": {"backend": "JEV classification", "weights_frozen": true},
+    "evidence_planner": {"backend": "OpenSpiel PUCT", "actual_call_cap": 72},
+    "first_answer": {"immutable": true, "diagnoses_per_case": 1},
+    "post_case_advisor": {"backend": "Qwen3.5-27B", "before_first_answer": false},
+    "experience_admission": {"precision_min": 0.95, "supporting_cases_min": 2, "historical_diagnosis_reruns": 0}
+  },
+  "initial_rules": [],
+  "initial_case_experience": null
+}
