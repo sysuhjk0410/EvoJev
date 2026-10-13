@@ -104,10 +104,12 @@ class PackageTests(unittest.TestCase):
 
     def test_readme_is_compact_and_local_documentation_links_resolve(self):
         text = (ROOT / 'README.md').read_text()
-        self.assertLessEqual(len(text.splitlines()), 80)
-        self.assertIn('docs/methodology.md', text)
-        self.assertIn('scripts/prepare_online.py', text)
-        self.assertIn('configs/local.json', text)
+        self.assertLessEqual(len(text.splitlines()), 24)
+        self.assertIn('[**打开交互系统**](https://sysuhjk0410.github.io/EvoJev/)', text)
+        self.assertIn('## 方法', text)
+        self.assertNotIn('## 总体准确率', text)
+        self.assertNotIn('## 运行方法', text)
+        self.assertNotIn('```', text)
         self.assertNotIn('[完整运行指南]', text)
         for path in (ROOT / 'README.md', ROOT / 'docs/methodology.md', ROOT / 'docs/reproduce.md'):
             for target in re.findall(r'\]\(([^)]+)\)', path.read_text()):

@@ -60,7 +60,10 @@ def accuracy_section(summary):
 
 def update_accuracy_readme(text, summary):
     pattern = r'(?ms)^## 总体准确率\n.*?(?=^## |\Z)'
-    if len(re.findall(pattern, text)) != 1:
+    sections = re.findall(pattern, text)
+    if not sections and '[**打开交互系统**](' in text and '![EvoJev 方法流程](workflow.png)' in text:
+        return text
+    if len(sections) != 1:
         raise ValueError('README must contain one dedicated accuracy section')
     return re.sub(pattern, lambda match: accuracy_section(summary), text)
 

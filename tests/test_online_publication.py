@@ -105,6 +105,12 @@ class OnlinePublicationTests(unittest.TestCase):
             with self.subTest(text=text), self.assertRaises(ValueError):
                 publish_online.update_accuracy_readme(text, self.summary)
 
+    def test_compact_readme_remains_unchanged(self):
+        text = (ROOT / 'README.md').read_text()
+        self.assertEqual(publish_online.update_accuracy_readme(text, self.summary), text)
+        self.assertNotIn('## 总体准确率', text)
+        self.assertIn('https://sysuhjk0410.github.io/EvoJev/', text)
+
     def test_serving_change_discloses_only_public_metadata(self):
         path = self.run_path / 'advisor_context_256k_transition.json'
         path.write_text(json.dumps({'phase': 'ready_and_resumed', 'first_answers_unchanged': True,

@@ -102,15 +102,20 @@ class PublicationTests(unittest.TestCase):
                     self.assertNotIn('output', trace['steps'][0])
             old = (ROOT / 'README.md').read_text()
             text = publication.readme(old, p)
+            self.assertEqual(text, old)
             self.assertEqual(publication.readme(text, p), text)
             self.assertNotIn('frontend.gif', text)
             self.assertIn('workflow.png', text)
-            self.assertIn('4524', text)
-            self.assertIn('155', text)
-            self.assertIn('## 运行方法', text)
+            self.assertNotIn('## 运行方法', text)
             self.assertNotIn('methodology.gif', text)
             self.assertIn('post-hoc', publication.report(p))
             self.assertNotIn(str(ROOT), text)
+            legacy = '# EvoJev\n\n## 总体准确率\n\nOld result\n\n## 运行方法\n\nRetain run instructions\n'
+            updated = publication.readme(legacy, p)
+            self.assertIn('4524', updated)
+            self.assertIn('155', updated)
+            self.assertIn('Retain run instructions', updated)
+            self.assertEqual(publication.readme(updated, p), updated)
 
     def test_partial_predictions_rejected_before_label_access(self):
         with tempfile.TemporaryDirectory() as temp:

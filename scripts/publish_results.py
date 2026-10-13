@@ -172,6 +172,8 @@ def build(run):
 
 
 def readme(old, progress):
+    if not re.search(r'^## 总体准确率$', old, re.M) and '[**打开交互系统**](' in old and '![EvoJev 方法流程](workflow.png)' in old:
+        return old
     s = progress['summary']
     methods = ('## 方法\n\nEvoJev 使用冻结 JEV 的分类排序先验，结合源绑定的可执行 Harness、历史证据经验模型和有预算的证据采集。'
                '本次对照包含蒙特卡洛树搜索 PUCT、一步贪心、去除 JEV、参考 Harness、初始 PUCT 和覆盖目标 PUCT。'

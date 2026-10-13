@@ -23,8 +23,8 @@
     },
     {
       "file": "README.md",
-      "bytes": 4517,
-      "sha256": "ad714bbdf9c3f0fca865bc02775155d160a1e943e4246935b6f26566102a454a"
+      "bytes": 1215,
+      "sha256": "eaa48242231fb51099d854ff715ce9f4358a6abdb63ffbf569187a010fa2483b"
     },
     {
       "file": "THIRD_PARTY_NOTICES.md",
@@ -138,13 +138,13 @@
     },
     {
       "file": "scripts/publish_online.py",
-      "bytes": 10873,
-      "sha256": "51efdb81d09bd41fe543ffe05f0156ea6356c0dc9dfbcb9133c0b272de83fb07"
+      "bytes": 11029,
+      "sha256": "26f9c2eccb5351e16c6194d86361279a2038fe0f29e3bafe52fe6615bd2f0e00"
     },
     {
       "file": "scripts/publish_results.py",
-      "bytes": 21201,
-      "sha256": "e98888a905615af7663fcc6e88a1c605afd6485fe1508ff5a626cd8bc691f31d"
+      "bytes": 21367,
+      "sha256": "249a3e133f5375a14d73084139ebbb809128250b6ae7c21231d739eb3e3d5d8f"
     },
     {
       "file": "scripts/render_workflow.py",
@@ -323,18 +323,18 @@
     },
     {
       "file": "tests/test_online_publication.py",
-      "bytes": 6528,
-      "sha256": "118230da25ddf3824563ab286af4f45289a4e48966485304315e8b8dcaa95de5"
+      "bytes": 6842,
+      "sha256": "853edc21954c881e3fcfecd98fa347bc2113f919f0644a32a08fded1cd3925d1"
     },
     {
       "file": "tests/test_package.py",
-      "bytes": 8822,
-      "sha256": "d763a7b46956168a27aba9115e04f5516411f81337ff7d4722a9ec150f5ad001"
+      "bytes": 8941,
+      "sha256": "3abf992d1535eb9bd6b5bcef80ba45192bd3b3f635d83cddb1f0ee2422f5df47"
     },
     {
       "file": "tests/test_publication.py",
-      "bytes": 9683,
-      "sha256": "369f6d341699cd7960e7b41e681ded8fddfbb3626343849275dd3d51ee5eaedc"
+      "bytes": 10032,
+      "sha256": "d12826cc71682feeddffc10be0a8b410c60ee258c176c5bdff54290c0a15be5a"
     },
     {
       "file": "tests/test_quality.py",
@@ -4262,7 +4262,7 @@
       "sha256": "10b74eb51052e8ccb3d9215da06ea67e7b18f5c789eef3f753dc90dba5b33f8b"
     }
   ],
-  "total_bytes": 47296662,
+  "total_bytes": 47294464,
   "models_bundled": false,
   "full_benchmark_bundled": false,
   "benchmark_payload_bundled": true,
